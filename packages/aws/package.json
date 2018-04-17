@@ -1,5 +1,5 @@
 {
-  "name": "aws",
+  "name": "@quirk0.o/serverless-research-aws",
   "version": "1.0.0",
   "description": "",
   "private": true,

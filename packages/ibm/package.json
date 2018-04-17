@@ -1,5 +1,5 @@
 {
-  "name": "openwhisk-nodejs",
+  "name": "@quirk0.o/serverless-research-ibm",
   "version": "1.0.0",
   "description": "Sample OpenWhisk NodeJS serverless framework service.",
   "private": true,
