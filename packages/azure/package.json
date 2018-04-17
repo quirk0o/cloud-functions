@@ -1,5 +1,5 @@
 {
-  "name": "azure-nodejs",
+  "name": "@quirk0.o/serverless-research-azure",
   "version": "1.0.0",
   "description": "Azure Functions sample for the Serverless framework",
   "private": true,
