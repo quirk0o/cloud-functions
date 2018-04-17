@@ -2,6 +2,7 @@
   "name": "aws",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "handler.js",
   "dependencies": {
     "aws-sdk": "^2.82.0",
