@@ -1,6 +1,9 @@
+environment/environment.js
+
 # package directories
 node_modules
 jspm_packages
 
 # Serverless directories
 .serverless
+transfer-function.json

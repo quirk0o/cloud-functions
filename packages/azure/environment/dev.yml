@@ -1,0 +1,4 @@
+service: serverless-azure-research-dev
+resourceGroup: serverless-azure-research-dev-rg
+container: serverlessresearchdevcontainer
+inputContainer: serverlessresearchdevinputcontainer

@@ -8,12 +8,22 @@
     "azure",
     "serverless"
   ],
+  "scripts": {
+    "deploy": "yarn env && sls deploy",
+    "env": "SLS_STAGE=${SLS_STAGE:-dev} perl -p -e 's/\\$\\{env:([^}]+)\\}/defined $ENV{$1} ? $ENV{$1} : $&/eg; s/\\$\\{env:([^}]+)\\}//eg' environment/environment.build.js > environment/environment.js"
+  },
   "devDependencies": {
     "serverless-azure-functions": "*"
   },
   "dependencies": {
+    "@quirk0.o/async": "^1.0.1",
+    "@quirk0.o/benchmark": "^1.0.1",
     "@quirk0.o/cloud-functions-common": "2.0.4",
-    "azure-storage": "^2.2.1",
-    "bluebird": "^3.5.0"
+    "azure-storage": "^2.8.2",
+    "bluebird": "^3.5.0",
+    "js-yaml": "^3.11.0"
+  },
+  "peerDependencies": {
+    "serverless": "^1.27.2"
   }
 }

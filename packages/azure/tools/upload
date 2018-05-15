@@ -1,7 +1,7 @@
 #!/bin/bash
  
-container_name=${AZURE_STORAGE_CONTAINER}
-source_folder='../files/*'
+container_name=${AZURE_STORAGE_INPUT_CONTAINER}
+source_folder=$1
  
 for f in $source_folder
 do
@@ -10,6 +10,6 @@ do
 done
  
 echo "List all blobs in container..."
-azure storage blob list $container_name
+az storage blob list --container-name $container_name
  
 echo "Completed"

@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@quirk0.o/async@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@quirk0.o/async/-/async-1.0.1.tgz#9e31590ba0c7af5100af86e73587fa2199639b76"
+
+"@quirk0.o/benchmark@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@quirk0.o/benchmark/-/benchmark-1.0.1.tgz#1f8d4ad72df3b70dcdacad123a3fc1f3da1e2692"
+  dependencies:
+    "@quirk0.o/async" "^1.0.1"
+
+"@quirk0.o/cloud-functions-common@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@quirk0.o/cloud-functions-common/-/cloud-functions-common-2.0.4.tgz#99a03da8f651ab86c34ba99b93abd28a3f149fae"
+
 "@types/caseless@*":
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/@types/caseless/-/caseless-0.12.1.tgz#9794c69c8385d0192acc471a540d1f8e0d16218a"
@@ -172,6 +186,12 @@ are-we-there-yet@~1.1.2:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
 
+argparse@^1.0.7:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
+  dependencies:
+    sprintf-js "~1.0.2"
+
 arr-diff@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/arr-diff/-/arr-diff-4.0.0.tgz#d6461074febfec71e7e15235761a329a5dc7c520"
@@ -288,9 +308,9 @@ azure-graph@^2.0.0-preview:
     ms-rest "^2.2.2"
     ms-rest-azure "^2.3.3"
 
-azure-storage@^2.2.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/azure-storage/-/azure-storage-2.8.1.tgz#ecb9d050ef1395e79ffbb652c02fe643687bec63"
+azure-storage@^2.8.2:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/azure-storage/-/azure-storage-2.8.2.tgz#19cb632b1e5630aeae54451a64dac160b165c848"
   dependencies:
     browserify-mime "~1.2.9"
     extend "~1.2.1"
@@ -603,10 +623,6 @@ cliui@^3.2.0:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
-
-"cloud-functions-common@git+https://github.com/quirk0o/cloud-functions-common.git#v2.0.4":
-  version "2.0.4"
-  resolved "git+https://github.com/quirk0o/cloud-functions-common.git#764ea3098c3de6d9acfbdbc4856853a84fe6c924"
 
 co@^4.6.0:
   version "4.6.0"
@@ -1018,6 +1034,10 @@ esprima@1.0.x, esprima@~1.0.2:
 esprima@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.2.2.tgz#76a0fd66fcfe154fd292667dc264019750b1657b"
+
+esprima@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
 
 esrecurse@^4.1.0:
   version "4.2.1"
@@ -1678,6 +1698,13 @@ jison@0.4.13:
     jison-lex "0.2.x"
     lex-parser "~0.1.3"
     nomnom "1.5.2"
+
+js-yaml@^3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.11.0.tgz#597c1a8bd57152f26d622ce4117851a51f5ebaef"
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -2864,6 +2891,10 @@ split-string@^3.0.1, split-string@^3.0.2:
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
   dependencies:
     extend-shallow "^3.0.0"
+
+sprintf-js@~1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
   version "1.14.1"

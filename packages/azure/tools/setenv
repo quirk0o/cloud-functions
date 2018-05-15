@@ -1,9 +1,9 @@
 #!/bin/bash
 
 az functionapp config appsettings set \
- --resource-group serverless-azure-random-rg \
- --name serverless-azure-random \
+ --resource-group serverless-azure-research-dev-rg \
+ --name serverless-azure-research-dev \
  --settings \
    AZURE_STORAGE_CONNECTION_STRING="${AZURE_STORAGE_CONNECTION_STRING}" \
-   AZURE_STORAGE_CONTAINER=${AZURE_STORAGE_CONTAINER} \
-   AZURE_STORAGE_FILE_CONTAINER=${AZURE_STORAGE_FILE_CONTAINER}
+   AZURE_STORAGE_CONTAINER=${AZURE_STORAGE_OUTPUT_CONTAINER} \
+   AZURE_STORAGE_INPUT_CONTAINER=${AZURE_STORAGE_INPUT_CONTAINER}

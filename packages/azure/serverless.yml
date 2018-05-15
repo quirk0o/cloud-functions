@@ -1,15 +1,17 @@
-service: serverless-azure-random
+service: ${self:custom.service}
 
 provider:
   name: azure
-  location: West US
+  location: westeurope
 
 plugins:
   - serverless-azure-functions
 
+custom: ${file(./environment/environment.js)}
+
 functions:
-  hello:
-    handler: handler.hello
+  transfer:
+    handler: handler.transfer
     events:
       - http: true
         x-azure-settings:
