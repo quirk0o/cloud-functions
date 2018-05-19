@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/cloud-functions-common",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Common utilities for cloud-functions repo",
   "main": "index.js",
   "scripts": {
