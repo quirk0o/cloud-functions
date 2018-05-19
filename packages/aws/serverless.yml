@@ -1,4 +1,4 @@
-service: serverless-research-transfer
+service: serverless-research-aws
 
 provider:
   name: aws
@@ -16,7 +16,7 @@ provider:
         Fn::Join:
           - ""
           - - "arn:aws:s3:::"
-            - { "Ref" : "RandomBucket" }
+            - { "Ref" : "OutputBucket" }
     - Effect: "Allow"
       Action:
         - "s3:ListBucket"
@@ -33,7 +33,7 @@ provider:
         Fn::Join:
           - ""
           - - "arn:aws:s3:::"
-            - "Ref" : "RandomBucket"
+            - "Ref" : "OutputBucket"
             - "/*"
     - Effect: "Allow"
       Action:
@@ -46,7 +46,7 @@ provider:
             - "/*"
 
   environment:
-    OUTPUT_BUCKET_NAME: { "Ref" : "RandomBucket" }
+    OUTPUT_BUCKET_NAME: { "Ref" : "OutputBucket" }
     INPUT_BUCKET_NAME: ${self:custom.${self:custom.stage}.inputBucket}
 
 custom:
@@ -103,7 +103,7 @@ functions:
 
 resources:
   Resources:
-    RandomBucket:
+    OutputBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.${self:custom.stage}.bucket}
