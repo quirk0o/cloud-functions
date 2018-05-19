@@ -19,7 +19,9 @@ const readFile = (bucket, fileName) => {
   const fileStream = file(bucket, fileName).createReadStream()
   const writer = fs.createWriteStream('/tmp/input.dat')
 
-  return streamToPromise(fileStream.pipe(writer))
+  fileStream.pipe(writer)
+
+  return streamToPromise(fileStream)
 }
 
 const writeFile = (bucket, fileName) => {
@@ -38,6 +40,8 @@ const writeFile = (bucket, fileName) => {
   }
 
   generator.pipe(writeStream)
+
+  return streamToPromise(generator)
 }
 
 exports.transfer = (request, response) => {
