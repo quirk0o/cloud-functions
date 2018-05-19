@@ -4,7 +4,7 @@ function streamToPromise(stream) {
       .on('error', function (err) {
         reject(err)
       })
-      .on('finish', function () {
+      .on('end', function () {
         resolve()
       })
   })
