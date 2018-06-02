@@ -19,29 +19,28 @@ const readFile = (bucket, fileName) => {
   const fileStream = file(bucket, fileName).createReadStream()
   const writer = fs.createWriteStream('/tmp/input.dat')
 
-  fileStream.pipe(writer)
-
-  return streamToPromise(fileStream)
+  return streamToPromise(fileStream.pipe(writer))
 }
 
 const writeFile = (bucket, fileName) => {
   const writeStream = file(bucket, fileName).createWriteStream()
-  const generator = new stream.Readable()
-  const size = 64 * 1024
-  const chunkSize = 16384
+  const size = 64 * 1024 * 1024
+  const chunkSize = size / 8
   let i = 1
 
-  generator._read = () => {
-    if (i > size) {
-      return generator.push(null)
+  const generator = new stream.Readable({
+    read(reqSize) {
+      console.log(`${process.memoryUsage().rss / 1024 / 1024} MB`)
+      if (i > size) {
+        return generator.push(null)
+      }
+      generator.push('\0'.repeat(reqSize))
+      i += chunkSize
     }
-    generator.push('\0'.repeat(chunkSize))
-    i += chunkSize
-  }
+  })
+  generator.pause()
 
-  generator.pipe(writeStream)
-
-  return streamToPromise(generator)
+  return streamToPromise(generator.pipe(writeStream))
 }
 
 exports.transfer = (request, response) => {
@@ -50,10 +49,12 @@ exports.transfer = (request, response) => {
 
   new Benchmark()
     .do('download')(
+      logP(() => `${process.memoryUsage().rss / 1024 / 1024} MB`),
       config(INPUT_BUCKET_CONFIG_KEY),
       logP(bucket => `Downloading gs://${bucket}/${inputFileName}`),
       (bucket) => readFile(bucket, inputFileName),
-      logP(() => `Finished downloading`)
+      logP(() => `Finished downloading`),
+      logP(() => `${process.memoryUsage().rss / 1024 / 1024} MB`)
     )
     .do('upload')(
       config(OUTPUT_BUCKET_CONFIG_KEY),
