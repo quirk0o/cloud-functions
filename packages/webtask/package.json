@@ -1,0 +1,8 @@
+{
+  "name": "@quirk0.o/serverless-research-webtask",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "quirk0.o <beata@obrok.eu>",
+  "license": "MIT",
+  "private": true
+}

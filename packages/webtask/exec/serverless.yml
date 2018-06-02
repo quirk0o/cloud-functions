@@ -1,0 +1,12 @@
+service:
+  name: serverless-research-webtask-exec
+
+provider:
+  name: webtasks
+
+functions:
+  exec:
+    handler: exec
+
+plugins:
+  - '@webtask/serverless-webtasks'
