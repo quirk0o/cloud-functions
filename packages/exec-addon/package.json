@@ -1,0 +1,15 @@
+{
+  "name": "@quirk0.o/exec-addon",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "quirk0o <beata@obrok.eu>",
+  "license": "MIT",
+  "gypfile": true,
+  "main": "./build/Release/exec.node",
+  "dependencies": {
+    "nan": "^2.10.0"
+  }
+}
