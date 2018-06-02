@@ -1,13 +1,13 @@
 {
   "name": "@quirk0.o/random-stream",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Generate a stream of random bytes",
   "main": "index.js",
   "repository": "https://github.com/quirk0o/cloud-functions",
   "author": "quirk0o <beata@obrok.eu>",
   "license": "MIT",
   "dependencies": {
-    "@quirk0.o/random-string": "^0.0.0"
+    "@quirk0.o/random-string": "^1.0.0"
   },
   "private": false,
   "publishConfig": {

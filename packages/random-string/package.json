@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/random-string",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Random string generation",
   "main": "index.js",
   "repository": "https://github.com/quirk0o/cloud-functions",
