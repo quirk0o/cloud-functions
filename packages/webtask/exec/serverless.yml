@@ -6,7 +6,7 @@ provider:
 
 functions:
   exec:
-    handler: exec
+    handler: webtask
 
 plugins:
   - '@webtask/serverless-webtasks'

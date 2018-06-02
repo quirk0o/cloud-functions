@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@webtask/serverless-webtasks": "^1.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "webtask-tools": "^3.2.1"
+  }
+}
