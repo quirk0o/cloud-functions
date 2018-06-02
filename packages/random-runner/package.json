@@ -11,5 +11,9 @@
   "main": "./build/Release/random.node",
   "dependencies": {
     "nan": "^2.10.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
   }
 }
