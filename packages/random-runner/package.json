@@ -1,0 +1,15 @@
+{
+  "name": "@quirk0.o/random-runner",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "quirk0o <beata@obrok.eu>",
+  "license": "MIT",
+  "gypfile": true,
+  "main": "./build/Release/random.node",
+  "dependencies": {
+    "nan": "^2.10.0"
+  }
+}
