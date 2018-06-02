@@ -1,2 +1,2 @@
-bucket: serverless-research-aws-dev-bucket
-inputBucket: serverless-research-aws-dev-input-bucket
+bucket: serverless-research-dev-bucket
+inputBucket: serverless-research-dev-input-bucket
