@@ -8,95 +8,77 @@ const Benchmark = require('@quirk0.o/benchmark')
 const {logP} = require('@quirk0.o/async')
 const randomStream = require('@quirk0.o/random-stream')
 
-const s3 = new AWS.S3()
-
 const OUTPUT_BUCKET = process.env.OUTPUT_BUCKET_NAME
 const INPUT_BUCKET = process.env.INPUT_BUCKET_NAME
 
-const timestampedFileName = () => `transfer_${(new Date()).toISOString()}`
+const outputFileName = (context) => `transfer_${context.memoryLimitInMB}`
+const inputFileName = (sizeStr) => `${sizeStr}.dat`
+const outputFileSize = (sizeStr) => bytes.parse(sizeStr)
+
 const file = (bucket, fileName, params) => Object.assign({Bucket: bucket, Key: fileName}, params)
-const readFile = (bucket, fileName) => {
-  const fileStream = s3.getObject(file(bucket, fileName)).createReadStream()
+const readFile = (service) => (bucket, fileName) => {
+  const fileStream = service.getObject(file(bucket, fileName)).createReadStream()
   const writer = fs.createWriteStream('/tmp/input.dat')
 
   streamToPromise(fileStream.pipe(writer))
 }
 
-const writeFile = (bucket, fileName, size) => {
+const writeFile = (service) => (bucket, fileName, size) => {
   const chunkSize = 5 * 1024 * 1024
 
   const generator = randomStream(size, chunkSize)
   const params = {Body: generator}
   const options = {partSize: chunkSize, queueSize: 1}
 
-  return bluebird.promisify(s3.upload)(file(bucket, fileName, params), options)
+  return bluebird.promisify(service.upload)(file(bucket, fileName, params), options)
 }
 const response = (json) => ({statusCode: 200, body: JSON.stringify(json)})
 
-const downloadPipeline = (inputFileName) => [
-  logP(() => `Downloading s3://${INPUT_BUCKET}/${inputFileName}`),
-  () => readFile(INPUT_BUCKET, inputFileName),
-  logP(() => `Finished downloading`)
-]
-
-const uploadPipeline = (fileSize) => [
-  timestampedFileName,
-  logP((fileName) => `Uploading to s3://${OUTPUT_BUCKET}/${fileName}`),
-  (fileName) => writeFile(OUTPUT_BUCKET, fileName, fileSize),
-  logP(() => `Finished uploading`)
-]
-
-exports.download128 = (event, context, callback) => {
-  const body = JSON.parse(event.body)
-  if (!body.size) {
-    callback(null, response({error: 'Missing file size in event data.'}))
-  }
-
-  const inputFileName = `${body.size}.dat`
-
-  new Benchmark()
-    .do('download')(
-      ...downloadPipeline(inputFileName)
-    )
-    .json()
-    .then(logP(json => `Finished: ${JSON.stringify(json)}`))
-    .then(json => callback(null, response(json)))
+const parseReq = (event) => JSON.parse(event.body)
+const validateReq = (body) => {
+  if (!body.size) throw new Error('Missing file size in event data.')
+  return body
 }
 
-exports.upload128 = (event, context, callback) => {
-  const body = JSON.parse(event.body)
-  if (!body.size) {
-    callback(null, response({error: 'Missing file size in event data.'}))
+const runTasks = (...taskList) => (event, context, callback) => {
+  try {
+    const s3 = new AWS.S3({signatureVersion: 'v4'})
+    const {size} = validateReq(parseReq(event))
+
+    const benchmark = new Benchmark()
+
+    if (taskList.includes('download')) {
+      benchmark
+        .do('download')(
+          () => inputFileName(size),
+          logP((fileName) => `Downloading s3://${INPUT_BUCKET}/${fileName}`),
+          (fileName) => readFile(s3)(INPUT_BUCKET, fileName),
+          logP(() => `Finished downloading`)
+        )
+    }
+
+    if (taskList.includes('upload')) {
+      benchmark
+        .do('upload')(
+          () => outputFileName(context),
+          (fileName) => [fileName, outputFileSize(size)],
+          logP(([fileName]) => `Uploading to s3://${OUTPUT_BUCKET}/${fileName}`),
+          ([fileName, fileSize]) => writeFile(s3)(OUTPUT_BUCKET, fileName, fileSize),
+          logP(() => `Finished uploading`)
+        )
+    }
+
+    return benchmark
+      .json()
+      .then(logP(json => `Finished: ${JSON.stringify(json)}`))
+      .then(json => callback(null, response(json)))
+
+
+  } catch (e) {
+    callback(null, response({error: e.message}))
   }
-
-  const fileSize = bytes.parse(body.size)
-
-  new Benchmark()
-    .do('upload')(
-      ...uploadPipeline(fileSize)
-    )
-    .json()
-    .then(logP(json => `Finished: ${JSON.stringify(json)}`))
-    .then(json => callback(null, response(json)))
 }
 
-exports.transfer = (event, context, callback) => {
-  const body = JSON.parse(event.body)
-  if (!body.size) {
-    callback(null, response({error: 'Missing file size in event data.'}))
-  }
-
-  const fileSize = bytes.parse(body.size)
-  const inputFileName = `${body.size}.dat`
-
-
-  new Benchmark()
-    .do('download')(
-      ...downloadPipeline(inputFileName))
-    .do('upload')(
-      ...uploadPipeline(fileSize)
-    )
-    .json()
-    .then(logP(json => `Finished: ${JSON.stringify(json)}`))
-    .then(json => callback(null, response(json)))
-}
+exports.download128 = runTasks('download')
+exports.upload128 = runTasks('upload')
+exports.transfer = runTasks('download', 'upload')
