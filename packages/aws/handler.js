@@ -30,7 +30,7 @@ const writeFile = (service) => (bucket, fileName, size) => {
   const params = {Body: generator}
   const options = {partSize: chunkSize, queueSize: 1}
 
-  return bluebird.promisify(service.upload)(file(bucket, fileName, params), options)
+  return bluebird.promisify(service.upload.bind(service))(file(bucket, fileName, params), options)
 }
 const response = (json) => ({statusCode: 200, body: JSON.stringify(json)})
 
