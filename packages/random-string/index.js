@@ -7,5 +7,5 @@ module.exports = (size) => {
 
   const chunks = size / 8
 
-  return Array(chunks).fill(null).map(randomBytes)
+  return Array(chunks).fill(null).map(randomBytes).join('')
 }
