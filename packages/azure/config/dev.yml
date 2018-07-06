@@ -1,0 +1,4 @@
+service: serverless-research-azure-dev-transfer
+resourceGroup: serverless-research-azure-dev-transfer-rg
+container: serverlessresearchdevcontainer
+inputContainer: serverlessresearchdevinputcontainer

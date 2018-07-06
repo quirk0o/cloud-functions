@@ -1,4 +1,5 @@
-environment/environment.js
+*.env
+config/local-*
 
 # package directories
 node_modules

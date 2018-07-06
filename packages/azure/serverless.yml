@@ -1,13 +1,22 @@
-service: ${self:custom.service}
+service: ${self:custom.config.service}
 
 provider:
   name: azure
   location: westeurope
+  stage: dev
 
 plugins:
   - serverless-azure-functions
+  - serverless-plugin-write-env-vars
 
-custom: ${file(./environment/environment.js)}
+custom:
+  config: ${file(./config/index.js)}
+  stage: ${self:custom.config.stage}
+  writeEnvVars:
+    stage: ${self:custom.stage}
+    connectionString: ${self:custom.config.connectionString}
+    inputContainer: ${self:custom.config.inputContainer}
+    container: ${self:custom.config.container}
 
 functions:
   transfer:
