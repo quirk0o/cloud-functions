@@ -35,7 +35,7 @@ class Benchmark {
       return pipeP(...fns)
         .then(() => this._time[key] = process.hrtime(hrtime))
         .then(logP(() => `${key} finished`))
-        .catch(tapError(logP(err => `${key} error: ${err}`)))
+        .catch(tapError(logP(err => `${key} error: ${err.stack}}`)))
         .catch(error => this._response[key] = {error: error.toString()})
     }
   }
