@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/serverless-research-gcf",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "",
   "private": true,
   "main": "index.js",

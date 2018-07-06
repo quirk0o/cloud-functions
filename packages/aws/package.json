@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/serverless-research-aws",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "",
   "private": true,
   "main": "handler.js",
@@ -12,7 +12,7 @@
     "@quirk0.o/async": "^1.0.1",
     "@quirk0.o/benchmark": "^1.0.1",
     "@quirk0.o/cloud-functions-common": "^3.0.1",
-    "@quirk0.o/random-stream": "^1.0.0",
+    "@quirk0.o/random-stream": "^1.0.1",
     "bluebird": "^3.5.0",
     "bytes": "^3.0.0",
     "s3-upload-stream": "^1.0.7"
