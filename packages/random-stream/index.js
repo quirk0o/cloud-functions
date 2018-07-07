@@ -1,7 +1,5 @@
 const stream = require('stream')
 
-const randomString = require('@quirk0.o/random-string')
-
 module.exports = (size, maxChunkSize) => {
   let i = 0
 
@@ -14,7 +12,7 @@ module.exports = (size, maxChunkSize) => {
       const chunkSize = i + maxChunkSize <= size
         ? maxChunkSize
         : size - i
-      generator.push(randomString(chunkSize))
+      generator.push('\0'.repeat(chunkSize))
       i += chunkSize
     }
   })
