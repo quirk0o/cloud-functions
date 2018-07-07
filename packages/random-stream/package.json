@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/random-stream",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Generate a stream of random bytes",
   "main": "index.js",
   "repository": "https://github.com/quirk0o/cloud-functions",
