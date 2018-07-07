@@ -2,6 +2,7 @@ const fs = require('fs')
 const AWS = require('aws-sdk')
 const bytes = require('bytes')
 const bluebird = require('bluebird')
+const stream = require('stream')
 
 const {streamToPromise} = require('@quirk0.o/cloud-functions-common')
 const Benchmark = require('@quirk0.o/benchmark')
@@ -11,7 +12,7 @@ const randomStream = require('@quirk0.o/random-stream')
 const OUTPUT_BUCKET = process.env.OUTPUT_BUCKET_NAME
 const INPUT_BUCKET = process.env.INPUT_BUCKET_NAME
 
-const outputFileName = (context) => `transfer_${context.memoryLimitInMB}`
+const outputFileName = (context, sizeStr) => `transfer_${context.memoryLimitInMB}_${sizeStr}`
 const inputFileName = (sizeStr) => `${sizeStr}.dat`
 const outputFileSize = (sizeStr) => bytes.parse(sizeStr)
 
@@ -24,11 +25,10 @@ const readFile = (service) => (bucket, fileName) => {
 }
 
 const writeFile = (service) => (bucket, fileName, size) => {
-  const chunkSize = 5 * 1024 * 1024
-
-  const generator = randomStream(size, chunkSize)
+  const maxChunkSize = 5 * 1024 * 1024
+  const generator = randomStream(size, maxChunkSize)
   const params = {Body: generator}
-  const options = {partSize: chunkSize, queueSize: 1}
+  const options = {partSize: maxChunkSize, queueSize: 1}
 
   return bluebird.promisify(service.upload.bind(service))(file(bucket, fileName, params), options)
 }
@@ -60,7 +60,7 @@ const runTasks = (...taskList) => (event, context, callback) => {
     if (taskList.includes('upload')) {
       benchmark
         .do('upload')(
-          () => outputFileName(context),
+          () => outputFileName(context, size),
           (fileName) => [fileName, outputFileSize(size)],
           logP(([fileName]) => `Uploading to s3://${OUTPUT_BUCKET}/${fileName}`),
           ([fileName, fileSize]) => writeFile(s3)(OUTPUT_BUCKET, fileName, fileSize),
