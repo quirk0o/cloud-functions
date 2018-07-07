@@ -43,7 +43,7 @@ bucket_name=$inputBucket
 if aws s3 ls "s3://$bucket_name" 2>&1 | grep -q 'NoSuchBucket'
 then
    echo "Creating bucket $bucket_name"
-   aws s3 mb "s3://$bucket_name" --region eu-west-1
+   aws s3 mb "s3://$bucket_name" --region us-east-1
    if [ $? -eq 1 ]
    then
      echo -e "${RED}Failed to create bucket $bucket_name${NC}" >&2
