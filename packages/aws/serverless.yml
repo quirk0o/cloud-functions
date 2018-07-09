@@ -24,14 +24,6 @@ provider:
         Fn::Join:
           - ""
           - - "arn:aws:s3:::"
-            - { "Ref" : "HeapDumpBucket" }
-    - Effect: "Allow"
-      Action:
-        - "s3:ListBucket"
-      Resource:
-        Fn::Join:
-          - ""
-          - - "arn:aws:s3:::"
             - ${self:custom.${self:custom.stage}.inputBucket}
     - Effect: "Allow"
       Action:
@@ -42,16 +34,6 @@ provider:
           - ""
           - - "arn:aws:s3:::"
             - "Ref" : "OutputBucket"
-            - "/*"
-    - Effect: "Allow"
-      Action:
-        - "s3:PutObject"
-        - "s3:GetObject"
-      Resource:
-        Fn::Join:
-          - ""
-          - - "arn:aws:s3:::"
-            - "Ref" : "HeapDumpBucket"
             - "/*"
     - Effect: "Allow"
       Action:
@@ -144,9 +126,3 @@ resources:
       Properties:
         BucketName: ${self:custom.${self:custom.stage}.bucket}
         AccessControl: BucketOwnerFullControl
-    HeapDumpBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: serverless-research-heapdump
-        AccessControl: BucketOwnerFullControl
-
