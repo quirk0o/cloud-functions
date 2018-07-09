@@ -697,6 +697,10 @@ bytebuffer@~5:
   dependencies:
     long "~3"
 
+bytes@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
+
 cache-base@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cache-base/-/cache-base-1.0.1.tgz#0a7f46416831c8b662ee36fe4e7c59d76f666ab2"
@@ -766,10 +770,6 @@ cliui@^3.0.3:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
-
-"cloud-functions-common@git+https://github.com/quirk0o/cloud-functions-common.git#v2.0.4":
-  version "2.0.4"
-  resolved "git+https://github.com/quirk0o/cloud-functions-common.git#764ea3098c3de6d9acfbdbc4856853a84fe6c924"
 
 cloud-functions-runtime-config@^0.1.1:
   version "0.1.1"
