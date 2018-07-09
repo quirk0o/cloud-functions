@@ -21,7 +21,7 @@ const readFile = (service) => (bucket, fileName) => {
   const fileStream = service.getObject(file(bucket, fileName)).createReadStream()
   const writer = fs.createWriteStream('/tmp/input.dat')
 
-  streamToPromise(fileStream.pipe(writer))
+  return streamToPromise(fileStream.pipe(writer))
 }
 
 const writeFile = (service) => (bucket, fileName, size) => {
