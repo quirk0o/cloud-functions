@@ -1,4 +1,4 @@
-service: serverless-research-azure-transfer
-resourceGroup: serverless-research-azure-transfer-rg
+service: serverless-research-transfer
+resourceGroup: serverless-research-transfer-rg
 container: serverlessresearchcontainer
 inputContainer: serverlessresearchinputcontainer
