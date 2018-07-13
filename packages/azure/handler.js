@@ -8,7 +8,8 @@ const Benchmark = require('@quirk0.o/benchmark')
 const {logP} = require('@quirk0.o/async')
 const randomStream = require('@quirk0.o/random-stream')
 
-const timestampedFileName = () => `transfer_${(new Date()).getHours()}:${(new Date()).getMinutes()}`
+const outputFileName = () => `transfer`
+
 const readFile = (blobService) => (functionDirectory, container, fileName) => {
   const writer = fs.createWriteStream(path.resolve(functionDirectory, 'input.dat'))
   return blobService.getBlobToStreamAsync(container, fileName, writer)
