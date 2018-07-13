@@ -13,7 +13,8 @@
     "deploy:prod": "npm-run-all \"deploy -s prod {@}\" \"upload ../../sample_files/*  -s prod {@}\" --",
     "deploy:test": "npm-run-all \"deploy -s test {@}\" \"upload ../../sample_files/1MB.dat -s test {@}\" --",
     "upload": "node tools/upload.js",
-    "setenv": "node tools/setenv.js"
+    "setenv": "node tools/setenv.js",
+    "geturl": "node tools/geturl.js"
   },
   "devDependencies": {
     "config": "^1.30.0",
