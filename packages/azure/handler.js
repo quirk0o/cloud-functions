@@ -8,6 +8,7 @@ const Benchmark = require('@quirk0.o/benchmark')
 const {logP} = require('@quirk0.o/async')
 const randomStream = require('@quirk0.o/random-stream')
 
+const inputFileName = (sizeStr) => `${sizeStr}.dat`
 const outputFileName = () => `transfer`
 
 const readFile = (blobService) => (functionDirectory, container, fileName) => {
@@ -41,37 +42,38 @@ const requireSize = (context) => (body) => {
   if (!body.size) {
     send(context)({error: 'Missing file size in event data.'})
   }
+  return body.size
 }
 
 const requireEnv = (context) => (env) => {
   if (env.error) {
     send(context)({error: `Error loading env: '${env.error}'.`})
   }
+  return process.env
 }
+
 
 module.exports.transfer = (context, request) => {
   const {body} = request
   const functionDirectory = context.executionContext.functionDirectory
+
   const env = setEnv(functionDirectory)
+  const size = requireSize(context)(body)
+  const {connectionString, inputContainer, container} = requireEnv(context)(env)
 
-  requireSize(context)(body)
-  requireEnv(context)(env)
-
-  const {connectionString, inputContainer, container} = process.env
   const blobService = azure.createBlobService(connectionString)
 
-  const size = body.size
-  const sizeInBytes = bytes.parse(body.size)
-  const inputFileName = `${size}.dat`
+  const sizeInBytes = bytes.parse(size)
 
   new Benchmark()
     .do('download')(
-      logP(() => `Downloading azs://${inputContainer}/${inputFileName}`, context),
-      () => readFile(blobService)(functionDirectory, inputContainer, inputFileName),
+      () => inputFileName(size),
+      logP((fileName) => `Downloading azs://${inputContainer}/${fileName}`, context),
+      (fileName) => readFile(blobService)(functionDirectory, inputContainer, fileName),
       logP(() => `Finished downloading`, context)
     )
     .do('upload')(
-      timestampedFileName,
+      outputFileName,
       logP((fileName) => `Uploading to azs://${container}/${fileName}`, context),
       (fileName) => writeFile(blobService)(container, fileName, sizeInBytes),
       logP(() => `Finished uploading`, context)
