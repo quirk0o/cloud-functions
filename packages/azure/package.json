@@ -28,7 +28,7 @@
     "@quirk0.o/async": "^1.0.1",
     "@quirk0.o/benchmark": "^1.0.1",
     "@quirk0.o/cloud-functions-common": "2.0.4",
-    "@quirk0.o/random-stream": "^1.0.0",
+    "@quirk0.o/random-stream": "^2.0.0",
     "azure-storage": "^2.8.2",
     "bluebird": "^3.5.0",
     "bytes": "^3.0.0",

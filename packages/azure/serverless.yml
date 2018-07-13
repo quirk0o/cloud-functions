@@ -29,3 +29,20 @@ functions:
         x-azure-settings:
           diections: out
           name: res
+
+package:
+  exclude:
+    - .git/**
+    - .gitignore
+    - README.md
+    - .serverless.env
+    - config/**
+  include:
+    - handler.js
+    - node_modules/**
+    - config/custom-environment-variables.yml
+    - config/default.yml
+    - config/${self:custom.stage}.yml
+    - config/dev.yml
+    - config/index.js
+    - .env
