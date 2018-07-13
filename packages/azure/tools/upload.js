@@ -21,7 +21,7 @@ process.env.NODE_ENV = argv.stage
 
 const config = require('config')
 
-const SCRIPT_PATH = path.resolve(__dirname, './upload')
+const SCRIPT_PATH = path.resolve(__dirname, './upload.sh')
 const env = Object.assign({path: argv.path}, process.env, config.util.toObject())
 
 execFile(SCRIPT_PATH, [], {env}, (err, stdout, stderr) => {

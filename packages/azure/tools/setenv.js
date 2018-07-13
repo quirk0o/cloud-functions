@@ -16,7 +16,7 @@ process.env.NODE_ENV = argv.stage
 const config = require('config')
 console.log('Setting environment with config:', config)
 
-const SCRIPT_PATH = path.resolve(__dirname, './setenv')
+const SCRIPT_PATH = path.resolve(__dirname, './setenv.sh')
 const env = Object.assign({}, process.env, config.util.toObject())
 
 execFile(SCRIPT_PATH, [], {env}, (err, stdout, stderr) => {
