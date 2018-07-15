@@ -12,6 +12,10 @@
     "deploy": "sls deploy",
     "deploy:prod": "npm-run-all \"deploy -s prod {@}\" \"upload ../../sample_files/*  -s prod {@}\" --",
     "deploy:test": "npm-run-all \"deploy -s test {@}\" \"upload ../../sample_files/1MB.dat -s test {@}\" --",
+    "test": "yarn geturl -s test | xargs yarn invoke",
+    "invoke": "curl -X POST -H 'cache-control: no-cache' -H 'content-type: application/json' -d '{\"size\": \"1MB.dat\"}'",
+    "invoke:dev": "yarn geturl | xargs yarn invoke",
+    "invoke:prod": "yarn geturl -s prod | xargs yarn invoke",
     "upload": "node tools/upload.js",
     "setenv": "node tools/setenv.js",
     "geturl": "node tools/geturl.js"
