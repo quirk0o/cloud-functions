@@ -1,32 +1,25 @@
-const Promise = require('bluebird')
-const azure = Promise.promisifyAll(require('azure-storage'))
+const azure = require('azure-storage')
 const path = require('path')
-const fs = require('fs')
 const bytes = require('bytes')
-
+const randomStream = require('@quirk0.o/random-stream')
 const Benchmark = require('@quirk0.o/benchmark')
 const {logP} = require('@quirk0.o/async')
-const randomStream = require('@quirk0.o/random-stream')
 
-const inputFileName = (sizeStr) => `${sizeStr}.dat`
 const outputFileName = () => `transfer`
-
-const readFile = (blobService) => (functionDirectory, container, fileName) => {
-  const writer = fs.createWriteStream(path.resolve(functionDirectory, 'input.dat'))
-  return blobService.getBlobToStreamAsync(container, fileName, writer)
-}
 
 const writeFile = (blobService) => (container, fileName, size) => {
   const chunkSize = size / 8
   const generator = randomStream(size, chunkSize)
 
-  return blobService.createBlockBlobFromStreamAsync(
-    container,
-    fileName,
-    generator,
-    size,
-    {blockIdPrefix: 'block'}
-  )
+  return new Promise((resolve, reject) =>
+    blobService.createBlockBlobFromStream(
+      container,
+      fileName,
+      generator,
+      size,
+      {blockIdPrefix: 'block'},
+      (error) => error ? reject(error) : resolve()
+    ))
 }
 
 const response = (json) => ({status: 200, body: json})
@@ -52,30 +45,22 @@ const requireEnv = (context) => (env) => {
   return process.env
 }
 
-
-module.exports.transfer = (context, request) => {
-  const {body} = request
+module.exports.upload = (context, request) => {
+  const body = JSON.parse(request.body)
   const functionDirectory = context.executionContext.functionDirectory
 
   const env = setEnv(functionDirectory)
   const size = requireSize(context)(body)
-  const {connectionString, inputContainer, container} = requireEnv(context)(env)
+  const {connectionString, container} = requireEnv(context)(env)
+  const sizeInBytes = bytes.parse(size)
 
   const blobService = azure.createBlobService(connectionString)
 
-  const sizeInBytes = bytes.parse(size)
-
   new Benchmark()
-    .do('download')(
-      () => inputFileName(size),
-      logP((fileName) => `Downloading azs://${inputContainer}/${fileName}`, context),
-      (fileName) => readFile(blobService)(functionDirectory, inputContainer, fileName),
-      logP(() => `Finished downloading`, context)
-    )
     .do('upload')(
       outputFileName,
       logP((fileName) => `Uploading to azs://${container}/${fileName}`, context),
-      (fileName) => writeFile(blobService)(container, fileName, sizeInBytes),
+      (fileName) => writeFile(context, blobService)(container, fileName, sizeInBytes),
       logP(() => `Finished uploading`, context)
     )
     .json()

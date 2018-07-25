@@ -9,6 +9,12 @@ const argv = yargs
     describe: 'Serverless stage',
     type: 'string'
   })
+  .option('f', {
+    alias: 'function',
+    default: 'transfer',
+    describe: 'Function name',
+    type: 'string'
+  })
   .argv
 
 process.env.NODE_ENV = argv.stage
@@ -21,6 +27,5 @@ const env = Object.assign({}, process.env, config.util.toObject())
 execFile(SCRIPT_PATH, [], {env}, (err, stdout, stderr) => {
   if (err) throw new Error(stderr)
   const baseUrl = stdout.trim().replace(/"/g, '')
-  const url = `https://${baseUrl}/api/transfer`
-  console.log(url)
+  console.log(`https://${baseUrl}/api/${argv.function}`)
 })

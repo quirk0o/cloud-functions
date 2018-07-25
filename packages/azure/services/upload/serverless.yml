@@ -1,4 +1,4 @@
-service: ${self:custom.config.service}
+service: ${self:custom.config.service}-upload
 
 provider:
   name: azure
@@ -10,7 +10,7 @@ plugins:
   - serverless-plugin-write-env-vars
 
 custom:
-  config: ${file(./config/index.js)}
+  config: ${file(../../config/index.js)}
   stage: ${self:custom.config.stage}
   writeEnvVars:
     stage: ${self:custom.stage}
@@ -19,8 +19,8 @@ custom:
     container: ${self:custom.config.container}
 
 functions:
-  transfer:
-    handler: handler.transfer
+  upload:
+    handler: handler.upload
     events:
       - http: true
         x-azure-settings:
@@ -29,21 +29,3 @@ functions:
         x-azure-settings:
           diections: out
           name: res
-
-package:
-  exclude:
-    - .git/**
-    - .gitignore
-    - README.md
-    - .serverless.env
-    - config/**
-    - tools/*
-  include:
-    - handler.js
-    - node_modules/**
-    - config/custom-environment-variables.yml
-    - config/default.yml
-    - config/${self:custom.stage}.yml
-    - config/dev.yml
-    - config/index.js
-    - .env

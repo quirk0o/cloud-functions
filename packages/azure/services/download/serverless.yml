@@ -1,0 +1,32 @@
+service: ${self:custom.config.service}-download
+
+provider:
+  name: azure
+  location: westeurope
+  stage: dev
+  resourceGroup: ${self:custom.config.resourceGroup}
+
+plugins:
+  - serverless-azure-functions
+  - serverless-plugin-write-env-vars
+
+custom:
+  config: ${file(../../config/index.js)}
+  stage: ${self:custom.config.stage}
+  writeEnvVars:
+    stage: ${self:custom.stage}
+    connectionString: ${self:custom.config.connectionString}
+    inputContainer: ${self:custom.config.inputContainer}
+    container: ${self:custom.config.container}
+
+functions:
+  download:
+    handler: handler.download
+    events:
+      - http: true
+        x-azure-settings:
+          authLevel : anonymous
+      - http: true
+        x-azure-settings:
+          diections: out
+          name: res

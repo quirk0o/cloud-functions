@@ -1,4 +1,4 @@
-service: serverless-research-dev-transfer
-resourceGroup: serverless-research-dev-transfer-rg
+service: serverless-research-v2-dev
+resourceGroup: serverless-research-v2-dev-transfer-rg
 container: serverlessresearchdevcontainer
 inputContainer: serverlessresearchdevinputcontainer
