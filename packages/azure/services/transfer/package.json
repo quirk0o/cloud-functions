@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "deploy": "NODE_CONFIG_DIR=../../config \"sls deploy {@}\" --",
+    "deploy": "NODE_CONFIG_DIR=../../config sls deploy",
     "test": "NODE_CONFIG_DIR=../../config yarn invoke",
     "invoke": "NODE_CONFIG_DIR=../../config node ../../tools/invoke.js -f transfer",
     "geturl": "NODE_CONFIG_DIR=../../config node ../../tools/geturl.js -f transfer",
