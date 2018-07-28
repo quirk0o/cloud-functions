@@ -9,6 +9,7 @@
     "serverless"
   ],
   "scripts": {
+    "azlogin": "./tools/login.sh",
     "deploy": "npm-run-all deploy:upload deploy:download deploy:transfer",
     "deploy:upload": "cd services/upload && yarn deploy",
     "deploy:download": "cd services/download && yarn deploy",
