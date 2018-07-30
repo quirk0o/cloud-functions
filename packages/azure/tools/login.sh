@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo $AZURE_USERNAME
-az login -u $AZURE_USERNAME -p $AZURE_PASSWORD
+az login --service-principal -u $azureAppId --password $azureServicePrincipalPassword --tenant $azureServicePrincipalTenantId
+

@@ -8,7 +8,8 @@ env:
   global:
   - azureSubId=384815d4-5dfc-42ca-ac21-e6230ef961fa
   - azureServicePrincipalTenantId=479263bf-f430-4f07-9d9f-35e9e3280de6
-  - azureServicePrincipalClientId=http://azure-cli-2018-07-15-16-20-26
+  - azureServicePrincipalClientId=http://azure-cli-2018-07-30-20-43-38
+  - azureAppId=6c797e42-1081-4424-9d2f-36665476b53c
 before_install:
 - sudo apt-get install libsecret-1-dev
 - npm install -g serverless
