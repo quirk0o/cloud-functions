@@ -29,7 +29,7 @@ jobs:
     name: Deploy Test
     script: yarn deploy:test
     env:
-    - secure: GRFSiS9JmjxAvR7f+QHgHCZ9KwjfqXwz0RFjA47GknAShxL4eNyQ70xok0v9H5+d1MMRrZXXdZmdVfs4KN14wmtF53AQ2Dwu61QyLut2n4jOxwD+PM8QxVlN/o70SHUulca6QVa9lE6bHpHuiWgHPex1YyYwSTKCiYTXctsuuP/fO0ifQlqrXIogJ4EfVwmIx1TdToYoD/4mLIYsrUAKonw8rm2mSvX+1/ynKeoIsFZG7iStObaSITY7aaM99LjJADNZRF0ucvgIncyi2Eno/OjC85a6XrLIbpMn/O7TUo+RQC5x8SFKjAOG/53dvYLyOCGwNgoQr0yYxLHZNvDn3ftZCYuTYMbs69FiNLuoDbirRSx8wQjzIeUePlfS9gtGQfEOeUMvuRnhT4yx0Xqt9qQ4LCfVfNFF1dr8Vn1cTMYN/gB+b6dzh53Xbw3ILoSrnUFp/m9mXdI0k1yX3CYHIP2jR/kQVA7jFQMiAalqxyRpDXBm6da7VZDjYJ9aODqJqu/1h8YhUOGhuwhho2lJKPxeXYYz04Eybg++KuX48zi/3HnZzsu+9NOUhiBYfY1YXbyFHA261eo70ohwbklEeF4ok4l4RebXegdvM6hWxv0vJih8RZAr9VbQV9CAHEcnr23sd6oGHeKSqbQNfDYAk9ml+tIhPjf7B1RTUtj+I0g=
+    - CONNECTION_STRING=$AZURE_TEST_CONNECTION_STRING
   - stage: test
     name: Tests
     script: yarn test
@@ -38,4 +38,4 @@ jobs:
     name: Deploy
     script: yarn deploy:prod
     env:
-    - secure: jdszRnnYyOLCRpDpVfXMM0w8pQyQYixnCJQdHqA/DYtBncJc5j1qTrxQjp4f4hiXaQyijhOWq7BZ6M0B2QbxoL064/bkVlhZpKUufxz6gZHvWkI20YOpCFVKUSt+PRGTgBKynumE2ecv9AxJxU0yNUiZ9zkBL8GxuKyLMB1e15t5QdwtvlUKa7Vtz+dHpd45vVqUkNTRUP0y0nCnhC9cW+6jjuFx//dVSG5Durp7SqViWV2kIEeSi09WXZ1N4roGvttvX4Y32YvWxyGMSFlEssBJRS3aWwjg8unRhSseZnfddCWK0/MfVyaDPk72ZoK7h6WYubQz5vXFAX2g9Vi9pJcCP+skK/J3gRTXXYg+YUlHpPSNNbMQ5m/yze+CTY96IhaFUFwFKMyquA4MSuj3F784aDDDwHcYNqS4/CqsvB3kIeJX6zuq/Uu+1hkCVjXJ1YkhPAHFLLSaSjJOkTX1dSMda8Sbsy79d6bxUZClqQB61IMPZKPYpsvQVqmN6sqsauT6JHajqpcqjQju5RYxhjm3r2CwK9A84h7cXtI0BECevpjsdteU6dJz4HkIkZjsdWFIVnX5gar9oTSdXgQepF7NRdpYLbzvrVtLq3lBa9MTBmqGJwTfJjDkqP2T1O5rnW5CNoMg0FVzZQMIbhhNbx7/Plc3WXlqr8bvuxhsFkI=
+    - CONNECTION_STRING=$AZURE_PROD_CONNECTION_STRING
