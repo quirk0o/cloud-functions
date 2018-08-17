@@ -29,7 +29,7 @@ jobs:
     name: Deploy Test
     script: yarn deploy:test
     env:
-    - CONNECTION_STRING=$AZURE_TEST_CONNECTION_STRING
+    - AZURE_CONNECTION_STRING=$AZURE_TEST_CONNECTION_STRING
   - stage: test
     name: Tests
     script: yarn test
@@ -38,4 +38,4 @@ jobs:
     name: Deploy
     script: yarn deploy:prod
     env:
-    - CONNECTION_STRING=$AZURE_PROD_CONNECTION_STRING
+    - AZURE_CONNECTION_STRING=$AZURE_PROD_CONNECTION_STRING
