@@ -1,10 +1,6 @@
-# Serverless Azure Functions Node.js Template
+# Serverless Research
 
-This starter template allows quickly creating a Node.js-based service to Azure Functions. It relies on the `serverless-azure-functions` plugin, and therefore, before you can deploy it, you simply need to run `npm install` in order to acquire it (this dependency is already saved in the `package.json` file).
-
-### Setting up your Azure credentials
-
-Once the `serverless-azure-functions` plugin is installed, it expects to find your Azure credentials via a set of well-known environment variables. These will be used to actually authenticate with your Azure account, so that the Serverless CLI can generate the neccessary Azure resources on your behalf when you request a deployment (see below).
+## Setting up your Azure credentials
 
 The following environment variables must be set, with their respective values:
 
@@ -15,7 +11,7 @@ The following environment variables must be set, with their respective values:
 
 For details on how to create a service principal and/or acquire your Azure account's subscription/tenant ID, refer to the [Azure credentials](https://serverless.com/framework/docs/providers/azure/guide/credentials/) documentation.
 
-### Deploying the service
+## Deploying the service
 
 Once your Azure credentials are set, you can immediately deploy your service via the following command:
 
@@ -25,7 +21,7 @@ serverless deploy
 
 This will create the neccessary Azure resources to support the service and events that are defined in your `serverless.yml` file. 
 
-### Invoking and inspecting a function
+## Invoking and inspecting a function
 
 With the service deployed, you can test it's functions using the following command:
 
@@ -33,22 +29,17 @@ With the service deployed, you can test it's functions using the following comma
 serverless invoke -f hello
 ```
 
+```shell
+curl -X POST \
+  '[API_GATEWAY]' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{"fileName": "[FILENAME]"}'
+```
+
+
 Additionally, if you'd like to view the logs that a function generates (either via the runtime, or create by your handler by calling `context.log`), you can simply run the following command:
 
 ```shell
 serverless logs -f hello
 ```
-
-### Cleaning up
-
-Once you're finished with your service, you can remove all of the generated Azure resources by simply running the following command:
-
-```shell
-serveless remove
-```
-
-### Issues / Feedback / Feature Requests?
-
-If you have any issues, comments or want to see new features, please file an issue in the project repository:
-
-https://github.com/serverless/serverless-azure-functions

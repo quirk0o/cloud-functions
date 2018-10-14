@@ -1,43 +1,41 @@
 sudo: required
-services:
-- docker
 language: node_js
 node_js:
 - '6'
 env:
   matrix:
-  - PROVIDER=google
-  - PROVIDER=google2
-  - PROVIDER=aws
   - PROVIDER=azure
-  - PROVIDER=openwhisk
   global:
-  - AWS_SERVICE_NAME=cloud-functions-research
-  - azureSubId=09f8875a-6349-4bad-aa48-290ee9895861
-  - azureServicePrincipalTenantId=33ece144-e0a8-4c38-982c-ad40d89eafd1
-  - azureServicePrincipalClientId=acf06957-006f-4635-abe5-b9ff835fec06
-  - secure: oabW3rp2yfFqX1kho3lkbZwq2sp+NQpX1Y0wzVm58weaxqtbpDbpr/t8oWdvQwX7UN1Yjwco3afx1rNa/jaw3NMo7Ku1+YfnT40Sdq9GfPBGKNL2ISasvkk2UaqFtdADltvg8+eLTrXJ149+SpcAEro8gu0M9q2TLatQMt8qgQfHNTvpsoRGPabNj7dDAS3m5rgyciskolwwPaXeFbpKyq/sHcW9O5oPXpNIKjS+2snE753D2lVPqdReyCkHOeHeQGHvIJZ6FNpG5vKy3vx+R1Fndv36jeRbaNPxmcig4mIx4Qcw2p2OV3jZ7i9yli1pAO4jXvIxn2IuF2l5mPhrR0m72IlHKp7tm1ivD8pIL/ZhMDl5UHw/NbuyzynMzUcJbIfrxqCGkCZTNn2iskBGk+Icf+nba/iMhz5xNI6sY72mhK0cJ9pnzRdbw9LBILL0h+VcizU60aYJfPMcc15ST1xquCbLti7V5mXGWfwS5EoXvve/Y9+NvZcHby2lB72JXMVX78c3i1twjyfFzvJWErePz6aapzv0HzP4ZTABfH0Qw9XzGIO9UfnfQw8W6NaMC+f7lJ7G+kehfslcsf/Ah+10gaZ52xm8igRdXPpirclGy0pDPdU/pzrCnB9UNHiWQZ/5YzEfTBbgkX3aF67OmpeFgH6bLqJWybdsuwIyui8=
-  - AWS_IAM_ROLE=arn:aws:iam::524374011118:role/lambdaRole
-  - AWS_REGION=eu-west-1
-  - AWS_ACCESS_KEY_ID=AKIAIU77AXAV2UQECR3A
-  - secure: svlP12fiW72UFlU9pvY2XkFawWzhbLW8+AO917HeExIrx052GqNiND0b44Igminj0USyoayky52RZfGvmNXA8MJ5G+QCUg5baYQf0OudyRFVL0PZqyM5TX3VoDr3QEyGNLITRN/mO3FMR9YCpnF+d8aI2sZp+udA3yE+3Xw5RWgcKS9SM1WjFXC6sJbKBS4WVdvdDxl9GYnG7x8IwNNMcHk3k3xZQgt45x4qvVweSA1gmREBgW9BsJ1vJdy+2RY5UsOmoL7Grwms6YrS+QvaLUnb0ctVP8pAMsnAdAXf/LlDA52Lo2uXJPPURl+utQt3Syw/MExs+f5qC5KQ0gATRsxNmHbLVAdojzZ/SjAYzvjhAHmjNQL3PcxfhXmvu6OcrAPnsIkwQgyXRbcvIHX0T+iZJVO8U8TXzrW0sbY6EHdOwfF9ABJ1Gf9as6GWeATkbXAHi/rCQh4alfifGDL7jwbDg1ZzUdzVuTXg9XDIHzUxJ+icj44BHNbe3SBBmipPJWJPO71NneAC8AeiWbYlyWy387eIxgp5eaRcm1G6QTAIbIzkSolu+9RofXhIXoC7vw+oBj7r2lkWvfRLXBQ2dGyiW+F2EkcFMuY9zMAZuVnFm3HVeFPUaa72tP4y2IZSXrYqumSZ92wYEJGI96toOV4CFub1Sf0oS3t5zbnXxWY=
-  - OW_APIHOST=openwhisk.ng.bluemix.net
-  - secure: ayxbxNRXwQtpxVEuNj2B1J6ASl4Y9qAFme7qcBGyKXx/0XITlDP7In43dGyFXfFXJ/gK1PgmsjdzYZUEmFjkJbA2n1hdjz4B2VqX6+4VayKFcNzggwKRoqZtllAqVo/eBx5WUvTpiLcU4SxwLZfBYqh95tlb/MISgtHaYhcXWmkQPTGygIrPP9ySqIH649UpF3KPldHayjROnpeJjP5o0yzQwPjfPuIL2wx3VZ+gZBEBytP+k1gbZdKAXO+nwppV4DMyKLVfCngX2kFWgezZFtDOQHybYLZXsGKkhSckwlTEwCk8zuRWK0Kc8yyhHCF2CI56cENswV80Pg6HDTmNS0IwmPN1dncGAQVa1jQTF+3v9Cm/7RaN2CCfGRX4NHAsBZCSd/d4i54mmxhSL9nhNkAOuWJsS7xcPgPjd5ljz1qo6kIUyrVj7S/kClrQ0AjE3k+ZhWEeRDMeOiSjafmsBTiv48enUZZSPIOWFBk+kZT2lQeACx/QiMSbelAqL2Mcjid9sqx61LaM9f8FoC1hgo/nJc1MEcxaerGtWY5iERtftLklal2IOJbTxXxbCtRAGW+mSx8RPAyVcgWHLenSmXRh//m2VIxxXQvHiQW0F3QXOClIKYpxGp8vFpUGXVzKdTDtzuZIGPbWSh8zeXg4AOkHs7jCjlFwK2gfD3HmpY0=
-  - INFLUX_ENDPOINT=http://54.72.17.168:8086/write?db=cloudfunctions
-  - INFLUX_USER=kfigiela
-  - secure: d0FtSa0rSMDXMFqrIbM3/YbmuC80ByL8fb+FYFp+QmcFLjsfkxpiCdvMhv7WJ+6Y02MJPWSnIzuVhkFkwVMsPtuTMq0Ks+VEuquGhQdIdSmBOxdirARXotikf+8QLd0rT5KLIKkJYvJAja0lDxroAJAvrld1fbLlNg1ZoPQcqJEoy0Bos3pYcEyT8o8LEbWs3zFP/z5VMZDFR4ATShCY3PjBzFjhhiTzc0X87s0JfOxhvxK27zIK2l8QxMnR6yxMjX8WqAyUpLGXXZJ6mH65N+w40z/n8HiVaBWnU2RO9jFkxEhm/pNsdAOXx5xRZL2dxtdy4zP2tat+GC2wDXL7nGgkFfUHvGeUvbp5dG8B3YlAiyHPQ6UdEgViCbkWKW3VEi9Py4eilgyF60t8Q87VfOQw7ujgHUHrVD/xIADF7p0ovgOam0ldel6cIqTVVI8HHgQ7fBsBmf9Zmh4Y0zfVUrtfyyR7CybhZ8N86Sic8Vg0geksw0mb7zBkio0otrRh45nlqm3v15kHgmVbZOvF/IYhJUURAPpo+k5q6a60TrRHWg/uW/dA80cnxRuGK42X/mfuU1hqscemQEh3/9yzEEoux9nUOliX1N2QyDtTvkoi7Mk2IHbdvTOMDEVdswcnu3nOAsNNiV8gsmwPlhtPzm221ZxR0Ztam4+eky3Ekww=
+  - azureSubId=384815d4-5dfc-42ca-ac21-e6230ef961fa
+  - azureServicePrincipalTenantId=479263bf-f430-4f07-9d9f-35e9e3280de6
+  - azureServicePrincipalClientId=http://azure-cli-2018-07-30-20-43-38
+  - azureAppId=6c797e42-1081-4424-9d2f-36665476b53c
 before_install:
+- sudo apt-get install libsecret-1-dev
 - npm install -g serverless
-- openssl aes-256-cbc -K $encrypted_d7975d884fb5_key -iv $encrypted_d7975d884fb5_iv
-  -in google/keyfile.json.enc -out google/keyfile.json -d
-- openssl aes-256-cbc -K $encrypted_76ea0603f64c_key -iv $encrypted_76ea0603f64c_iv
-  -in google2/keyfile.json.enc -out google2/keyfile.json -d
-- docker pull kfigiela/amazon-linux-development-tools
-script:
-- $PROVIDER/build_native.sh
-- cd $PROVIDER
-- npm install
-- serverless deploy
-notifications:
-  slack:
-    secure: B/oOxO+oBtM8eE2T9skEb0cxbYg1loNpb04Jwk+qlftCZh+bN8Yn66RPuqmmEQGXalhbnyummfUqx6Fl/+38iMuqf8zpnVP3RU7xf5rP+5Qkht1cjpYdv1uv+YrXo/uzd1Pb3nNeUc9OQjsL5trtnICI4YscVHiFxvGIx7QMhgw90Gfncrlw1AUKDB0ijh8mQkJktX9xnp7xUWbwGsTUutX9OE1Bmzi9AK9dr6oddzP12akOEnt5jHZCSTTQWCJi2qV2jeU57Rm7c9ReqaAgVxPRX0/gCvfCWJilFuHA/dkDCAeqkwr7FKphanh7UvWa8AtHs44lTNLu281czhNje01Dvl6epIi/uf+pwMXZelTik084r1wCb0/MK7adMvRIGwIn5C3NC/UO/APUOVcd0eBqM1bpBgs22zEAAoT0GhX71B2SLPZ/AeVc492s0gz6WdJKhK5vQdIUOV8EmjBx8goNTDi0vn1QH9Cxtq/7sCYNIFgsn3AjGSOgLi67mr6jwYN1Hg+kMRlg9W8q3NHrLkNL9vR+Ii2v3dnLDY1KfSpH+7oq0QgKda6HkcZTT7FiA15VDGIlD7HszsGnW3XFBOJdYspJzLRHyKj8+CtOghH1vSgruqqS/eyd5ntwr0crubk9A27HMR7GSKSItMto8hHjN8Qd6GhhXVgJQdJOGmc=
+- echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release
+  -cs) main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+- curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+- sudo apt-get install apt-transport-https
+- sudo apt-get update && sudo apt-get install azure-cli
+- cd packages/azure
+install:
+- yarn install
+before_script:
+- yarn azlogin
+jobs:
+  include:
+  - stage: build
+    name: Deploy Test
+    script: yarn deploy:test
+    env:
+    - AZURE_CONNECTION_STRING=$AZURE_TEST_CONNECTION_STRING
+  - stage: test
+    name: Tests
+    script: yarn test
+  - stage: deploy
+    if: branch = master
+    name: Deploy
+    script: yarn deploy:prod
+    env:
+    - AZURE_CONNECTION_STRING=$AZURE_PROD_CONNECTION_STRING

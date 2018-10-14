@@ -1,0 +1,31 @@
+service: ${self:custom.config.service}-upload
+
+provider:
+  name: azure
+  location: westeurope
+  stage: dev
+
+plugins:
+  - serverless-azure-functions
+  - serverless-plugin-write-env-vars
+
+custom:
+  config: ${file(../../config/index.js)}
+  stage: ${self:custom.config.stage}
+  writeEnvVars:
+    stage: ${self:custom.stage}
+    connectionString: ${self:custom.config.connectionString}
+    inputContainer: ${self:custom.config.inputContainer}
+    container: ${self:custom.config.container}
+
+functions:
+  upload:
+    handler: handler.upload
+    events:
+      - http: true
+        x-azure-settings:
+          authLevel : anonymous
+      - http: true
+        x-azure-settings:
+          diections: out
+          name: res

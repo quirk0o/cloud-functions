@@ -17,5 +17,17 @@ module.exports = (size, maxChunkSize) => {
     }
   })
 
+  generator._read = () => {
+    if (i >= size) {
+      return generator.push(null)
+    }
+
+    const chunkSize = i + maxChunkSize <= size
+      ? maxChunkSize
+      : size - i
+    generator.push('\0'.repeat(chunkSize))
+    i += chunkSize
+  }
+
   return generator
 }

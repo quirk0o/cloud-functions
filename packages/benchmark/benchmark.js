@@ -1,11 +1,12 @@
 const {pipeP, logP, tapError} = require('@quirk0.o/async')
 
 class Benchmark {
-  constructor() {
+  constructor(logger = console) {
     this._keys = []
     this._queue = []
     this._response = {}
     this._time = {}
+    this._logger = logger
   }
 
   do(key) {
@@ -34,8 +35,8 @@ class Benchmark {
       let hrtime = process.hrtime()
       return pipeP(...fns)
         .then(() => this._time[key] = process.hrtime(hrtime))
-        .then(logP(() => `${key} finished`))
-        .catch(tapError(logP(err => `${key} error: ${err.stack}}`)))
+        .then(logP(() => `${key} finished`, this._logger))
+        .catch(tapError(logP(err => `${key} error: ${err.stack}}`, this._logger)))
         .catch(error => this._response[key] = {error: error.toString()})
     }
   }

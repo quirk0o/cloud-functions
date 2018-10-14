@@ -8,12 +8,53 @@
     "azure",
     "serverless"
   ],
+  "scripts": {
+    "azlogin": "./tools/login.sh",
+    "deploy": "npm-run-all deploy:upload deploy:download deploy:transfer",
+    "deploy:upload": "cd services/upload && yarn deploy",
+    "deploy:download": "cd services/download && yarn deploy",
+    "deploy:transfer": "cd services/transfer && yarn deploy",
+    "deploy:prod": "npm-run-all deploy:prod:upload deploy:prod:download deploy:prod:transfer \"upload ../../sample_files/*  -s prod\"",
+    "deploy:prod:upload": "cd services/upload && yarn deploy -s prod",
+    "deploy:prod:download": "cd services/download && yarn deploy -s prod",
+    "deploy:prod:transfer": "cd services/transfer && yarn deploy -s prod",
+    "deploy:test": "npm-run-all deploy:test:upload deploy:test:download deploy:test:transfer generate \"upload test.dat -s test\"",
+    "deploy:test:upload": "cd services/upload && yarn deploy -s test",
+    "deploy:test:download": "cd services/download && yarn deploy -s test",
+    "deploy:test:transfer": "cd services/transfer && yarn deploy -s test",
+    "test": "npm-run-all test:*",
+    "test:upload": "cd services/upload && yarn test",
+    "test:download": "cd services/download && yarn test",
+    "test:transfer": "cd services/transfer && yarn test",
+    "invoke:upload": "cd services/upload && yarn invoke",
+    "invoke:download": "cd services/download && yarn invoke",
+    "invoke:transfer": "cd services/transfer && yarn invoke",
+    "generate": "dd if=/dev/zero of=test.dat bs=1M count=1",
+    "invoke": "node tools/invoke.js",
+    "geturl": "node tools/geturl.js",
+    "upload": "node tools/upload.js",
+    "setenv": "node tools/setenv.js"
+  },
   "devDependencies": {
-    "serverless-azure-functions": "*"
+    "colors": "^1.3.0",
+    "config": "^1.30.0",
+    "js-yaml": "^3.12.0",
+    "npm-run-all": "^4.1.3",
+    "serverless-azure-functions": "*",
+    "serverless-plugin-write-env-vars": "^1.0.2",
+    "yargs": "^11.0.0"
   },
   "dependencies": {
+    "@quirk0.o/async": "^1.0.1",
+    "@quirk0.o/benchmark": "^1.0.1",
     "@quirk0.o/cloud-functions-common": "2.0.4",
-    "azure-storage": "^2.2.1",
-    "bluebird": "^3.5.0"
+    "@quirk0.o/random-stream": "^2.0.0",
+    "azure-storage": "^2.8.2",
+    "bluebird": "^3.5.0",
+    "bytes": "^3.0.0",
+    "dotenv": "^6.0.0"
+  },
+  "peerDependencies": {
+    "serverless": "^1.27.2"
   }
 }
