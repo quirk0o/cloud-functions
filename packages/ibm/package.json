@@ -10,5 +10,15 @@
   "keywords": [
     "serverless",
     "openwhisk"
-  ]
+  ],
+  "peerDependencies": {
+    "serverless": "^1.26.1",
+    "serverless-openwhisk": "^0.12.0"
+  },
+  "dependencies": {
+    "@quirk0.o/async": "^1.0.1",
+    "@quirk0.o/benchmark": "^1.0.1",
+    "@quirk0.o/cloud-functions-common": "^2.0.6",
+    "ibm-cos-sdk": "^1.2.0"
+  }
 }
