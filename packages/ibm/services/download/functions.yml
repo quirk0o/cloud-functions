@@ -1,0 +1,15 @@
+download-128:
+  handler: handler.download
+  memory: 128
+  events:
+    - http: POST download-128
+download-256:
+  handler: handler.download
+  memory: 256
+  events:
+    - http: POST download-256
+download-512:
+  handler: handler.download
+  memory: 512
+  events:
+    - http: POST download-512

@@ -1,0 +1,15 @@
+upload-128:
+  handler: handler.upload
+  memory: 128
+  events:
+    - http: POST upload-128
+upload-256:
+  handler: handler.upload
+  memory: 256
+  events:
+    - http: POST upload-256
+upload-512:
+  handler: handler.upload
+  memory: 512
+  events:
+    - http: POST upload-512

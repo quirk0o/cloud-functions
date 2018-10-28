@@ -1,0 +1,4 @@
+service: serverless-research-v2-test
+resourceGroup: serverless-research-v2-test-transfer-rg
+container: serverlessresearchtestcontainer
+inputContainer: serverlessresearchtestinputcontainer

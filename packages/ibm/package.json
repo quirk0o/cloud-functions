@@ -5,20 +5,57 @@
   "private": true,
   "main": "handler.js",
   "scripts": {
-    "postinstall": "npm link serverless-openwhisk"
+    "deploy": "sls deploy",
+    "deploy:prod": "npm-run-all deploy:prod:upload deploy:prod:download \"upload ../../sample_files/*  -s prod\"",
+    "deploy:prod:upload": "cd services/upload && yarn deploy -s prod",
+    "deploy:prod:download": "cd services/download && yarn deploy -s prod",
+    "deploy:test": "npm-run-all deploy:test:upload deploy:test:download generate \"upload test.dat -s test\"",
+    "deploy:test:upload": "cd services/upload && yarn deploy -s test",
+    "deploy:test:download": "cd services/download && yarn deploy -s test",
+    "test": "npm-run-all test:*",
+    "test:upload": "cd services/upload && yarn test",
+    "test:download": "cd services/download && yarn test",
+    "invoke:upload": "cd services/upload && yarn invoke",
+    "invoke:download": "cd services/download && yarn invoke",
+    "generate": "dd if=/dev/zero of=test.dat bs=1M count=1",
+    "invoke": "node tools/invoke.js",
+    "geturl": "node tools/geturl.js",
+    "upload": "node tools/upload.js",
+    "setenv": "node tools/setenv.js",
+    "link:download": "[ -L services/download/node_modules ] || cd services/download && ln -s ../../node_modules node_modules",
+    "link:upload": "[ -L services/upload/node_modules ] || cd services/upload && ln -s ../../node_modules node_modules",
+    "postinstall": "npm link serverless-openwhisk && yarn link:download && yarn link:upload"
   },
   "keywords": [
     "serverless",
     "openwhisk"
   ],
-  "peerDependencies": {
-    "serverless": "^1.26.1",
-    "serverless-openwhisk": "^0.12.0"
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "colors": "^1.3.0",
+    "config": "^1.30.0",
+    "jest": "^23.6.0",
+    "js-yaml": "^3.12.0",
+    "npm-run-all": "^4.1.3",
+    "request": "^2.88.0",
+    "serverless-azure-functions": "*",
+    "serverless-plugin-write-env-vars": "^1.0.2",
+    "yargs": "^11.0.0"
   },
   "dependencies": {
-    "@quirk0.o/async": "^1.0.1",
-    "@quirk0.o/benchmark": "^1.0.1",
-    "@quirk0.o/cloud-functions-common": "^2.0.6",
+    "@quirk0.o/async": "^2.0.0",
+    "@quirk0.o/benchmark": "^2.0.0",
+    "@quirk0.o/cloud-functions-common": "2.0.4",
+    "@quirk0.o/random-stream": "^3.0.0",
+    "@quirk0.o/serverless-config": "^1.0.0",
+    "azure-storage": "^2.8.2",
+    "bluebird": "^3.5.0",
+    "bytes": "^3.0.0",
+    "dotenv": "^6.0.0",
     "ibm-cos-sdk": "^1.2.0"
+  },
+  "peerDependencies": {
+    "serverless": "^1.27.2",
+    "serverless-openwhisk": "^0.12.0"
   }
 }

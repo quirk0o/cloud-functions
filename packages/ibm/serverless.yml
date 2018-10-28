@@ -1,25 +1,26 @@
-service: serverless-research-transfer
+service: ${self:custom.config.service}
 
 provider:
   name: openwhisk
   timeout: 240
-
-functions:
-  transfer-128:
-    handler: handler.transfer
-    memory: 128
-    events:
-      - http: POST transfer-128
-  transfer-256:
-    handler: handler.transfer
-    memory: 256
-    events:
-      - http: POST transfer-256
-  transfer-512:
-    handler: handler.transfer
-    memory: 512
-    events:
-      - http: POST transfer-512
+  stage: dev
 
 plugins:
   - serverless-openwhisk
+  - serverless-plugin-write-env-vars
+
+custom:
+  config: ${file(./config/index.js)}
+  stage: ${self:custom.config.stage}
+  writeEnvVars:
+    stage: ${self:custom.stage}
+    inputBucket: ${self:custom.config.inputBucket}
+    bucket: ${self:custom.config.bucket}
+    storageEndpoint: ${self:custom.config.storageEndpoint}
+    authEndpoint: ${self:custom.config.authEndpoint}
+    apiKeyId: ${self:custom.config.apiKeyId}
+    serviceInstanceId: ${self:custom.config.serviceInstanceId}
+
+functions:
+  - ${file(./services/upload/functions.yml)}
+  - ${file(./services/download/functions.yml)}

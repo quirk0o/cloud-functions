@@ -1,0 +1,2 @@
+authEndpoint: https://iam.ng.bluemix.net/oidc/token
+storageEndpoint: s3.us-south.objectstorage.softlayer.net
