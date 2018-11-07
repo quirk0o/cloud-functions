@@ -39,7 +39,7 @@ const requireSize = (params) => {
   return params.size
 }
 
-exports.upload = (params) => {
+exports.handler = (params) => {
   try {
     const size = requireSize(params)
     const sizeInBytes = bytes.parse(size)
@@ -54,9 +54,9 @@ exports.upload = (params) => {
       .json()
       .then(logP(json => `Finished: ${JSON.stringify(json)}`))
   } catch (e) {
-    // if (e instanceof MissingParamError) {
-    //   return {status: 400, error: e.message}
-    // }
+    if (e instanceof MissingParamError) {
+      return {status: 400, error: e.message}
+    }
     return {status: 500, error: e.message}
   }
 }

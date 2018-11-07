@@ -1,4 +1,4 @@
-service: ${self:custom.config.service}
+service: ${self:custom.config.service}-transfer
 
 provider:
   name: openwhisk
@@ -10,7 +10,7 @@ plugins:
   - serverless-plugin-write-env-vars
 
 custom:
-  config: ${file(./config/index.js)}
+  config: ${file(../../config/index.js)}
   stage: ${self:custom.config.stage}
   writeEnvVars:
     stage: ${self:custom.stage}
@@ -22,5 +22,6 @@ custom:
     serviceInstanceId: ${self:custom.config.serviceInstanceId}
 
 functions:
-  - ${file(./services/upload/functions.yml)}
-  - ${file(./services/download/functions.yml)}
+#  - ${file(./upload-functions.yml)}
+#  - ${file(./download-functions.yml)}
+  - ${file(./memory-usage-functions.yml)}

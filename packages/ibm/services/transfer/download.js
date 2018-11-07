@@ -49,7 +49,7 @@ const requireSize = (params) => {
   return params.size
 }
 
-exports.download = (params) => {
+exports.handler = (params) => {
   try {
     const size = requireSize(params)
 
