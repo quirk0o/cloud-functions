@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "deploy": "NODE_CONFIG_DIR=../../config sls deploy"
+  }
+}

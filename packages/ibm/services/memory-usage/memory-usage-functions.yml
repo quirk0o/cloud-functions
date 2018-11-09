@@ -1,0 +1,35 @@
+memory-usage-128:
+  handler: memory-usage.handler
+  memory: 128
+  events:
+    - http: POST memory-usage-128
+memory-usage-160:
+  handler: memory-usage.handler
+  memory: 160
+  events:
+    - http: POST memory-usage-160
+memory-usage-192:
+  handler: memory-usage.handler
+  memory: 192
+  events:
+    - http: POST memory-usage-192
+memory-usage-224:
+  handler: memory-usage.handler
+  memory: 224
+  events:
+    - http: POST memory-usage-224
+memory-usage-256:
+  handler: memory-usage.handler
+  memory: 256
+  events:
+    - http: POST memory-usage-256
+memory-usage-288:
+  handler: memory-usage.handler
+  memory: 288
+  events:
+    - http: POST memory-usage-288
+memory-usage-512:
+  handler: memory-usage.handler
+  memory: 512
+  events:
+    - http: POST memory-usage-512

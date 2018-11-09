@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "deploy": "NODE_CONFIG_DIR=../../config sls deploy",
+    "test": "NODE_CONFIG_DIR=../../config yarn invoke",
+    "invoke": "NODE_CONFIG_DIR=../../config node ../../tools/invoke.js -f download",
+    "geturl": "NODE_CONFIG_DIR=../../config node ../../tools/geturl.js -f download",
+    "setenv": "NODE_CONFIG_DIR=../../config node ../../tools/setenv.js"
+  }
+}
