@@ -8,6 +8,7 @@
     "deploy": "yarn deploy:transfer",
     "deploy:transfer": "cd services/transfer && yarn deploy",
     "deploy:cpu": "cd services/cpu && yarn deploy",
+    "deploy:hello": "cd services/hello && yarn deploy",
     "deploy:prod": "npm-run-all deploy:prod:hello deploy:prod:transfer \"upload ../../sample_files/*  -s prod\"",
     "deploy:prod:transfer": "cd services/transfer && yarn deploy -s prod",
     "deploy:prod:cpu": "cd services/cpu && yarn deploy -s prod",
@@ -19,8 +20,8 @@
     "invoke": "node tools/invoke.js",
     "geturl": "node tools/geturl.js",
     "upload": "node tools/upload.js",
-    "link:transfer": "[ -L services/transfer/node_modules ] || cd services/transfer && ln -s ../../node_modules node_modules",
-    "link:cpu": "[ -L services/cpu/node_modules ] || cd services/cpu && ln -s ../../node_modules node_modules",
+    "link:transfer": "[ -L services/transfer/node_modules ] || cd services/transfer && ln -sFf ../../node_modules node_modules",
+    "link:cpu": "[ -L services/cpu/node_modules ] || cd services/cpu && ln -sFf ../../node_modules node_modules",
     "postinstall": "yarn link:transfer && yarn link:cpu"
   },
   "keywords": [

@@ -1,0 +1,20 @@
+service: serverless-research-hello
+
+provider:
+  name: spotinst
+  stage: dev
+  spotinst:
+    environment: env-0b587377
+
+functions:
+  hello:
+    runtime: nodejs8.3
+    handler: handler.hello
+    memory: 128
+    timeout: 30
+    access: public
+    environmentVariables:
+      key: Value
+
+plugins:
+  - serverless-spotinst-functions
