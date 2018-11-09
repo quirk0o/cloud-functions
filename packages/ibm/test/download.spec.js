@@ -19,6 +19,7 @@ describe('download', () => {
     describe(`${memory}MB`, () => {
       it('tests download speed', async () => {
         try {
+          console.log(url(memory))
           const response = await request.post(url(memory), {size})
           expect(response.status).toEqual(200)
 

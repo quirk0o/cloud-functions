@@ -1,4 +1,2 @@
-service: serverless-research-transfer
-resourceGroup: serverless-research-transfer-rg
-container: serverlessresearchcontainer
-inputContainer: serverlessresearchinputcontainer
+bucket: serverless-research-prod-bucket
+inputBucket: serverless-research-prod-input-bucket

@@ -22,6 +22,5 @@ custom:
     serviceInstanceId: ${self:custom.config.serviceInstanceId}
 
 functions:
-#  - ${file(./upload-functions.yml)}
-#  - ${file(./download-functions.yml)}
-  - ${file(./memory-usage-functions.yml)}
+  - ${file(./upload-functions.yml)}
+  - ${file(./download-functions.yml)}

@@ -1,3 +1,2 @@
-service: serverless-research
 bucket: serverless-research-dev-bucket
 inputBucket: serverless-research-dev-input-bucket

@@ -1,3 +1,4 @@
+service: serverless-research
 authEndpoint: https://iam.ng.bluemix.net/oidc/token
 storageEndpoint: s3.us-south.objectstorage.softlayer.net
 apiEndpoint: https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api
