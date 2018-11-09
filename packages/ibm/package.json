@@ -49,8 +49,7 @@
     "bluebird": "^3.5.0",
     "bytes": "^3.0.0",
     "dotenv": "^6.0.0",
-    "ibm-cos-sdk": "^1.2.0",
-    "pbkdf2": "^3.0.17"
+    "ibm-cos-sdk": "^1.2.0"
   },
   "peerDependencies": {
     "serverless": "^1.27.2",
