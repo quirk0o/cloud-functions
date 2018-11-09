@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/serverless-research-ibm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sample OpenWhisk NodeJS serverless framework service.",
   "private": true,
   "main": "handler.js",
@@ -42,9 +42,9 @@
   "dependencies": {
     "@quirk0.o/async": "^2.0.0",
     "@quirk0.o/benchmark": "^2.0.0",
-    "@quirk0.o/cloud-functions-common": "^3.0.1",
+    "@quirk0.o/cloud-functions-common": "^3.0.2",
     "@quirk0.o/random-stream": "^3.0.0",
-    "@quirk0.o/serverless-config": "^1.0.0",
+    "@quirk0.o/serverless-config": "^1.0.1",
     "azure-storage": "^2.8.2",
     "bluebird": "^3.5.0",
     "bytes": "^3.0.0",
