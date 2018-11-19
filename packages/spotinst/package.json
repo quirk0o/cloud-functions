@@ -1,0 +1,56 @@
+{
+  "name": "@quirk0.o/serverless-research-spotinst",
+  "version": "1.0.1",
+  "description": "Serverless Spotinst benchmarks",
+  "private": true,
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "yarn deploy:transfer",
+    "deploy:transfer": "cd services/transfer && yarn deploy",
+    "deploy:cpu": "cd services/cpu && yarn deploy",
+    "deploy:hello": "cd services/hello && yarn deploy",
+    "deploy:prod": "npm-run-all deploy:prod:hello deploy:prod:transfer \"upload ../../sample_files/*  -s prod\"",
+    "deploy:prod:transfer": "cd services/transfer && yarn deploy -s prod",
+    "deploy:prod:cpu": "cd services/cpu && yarn deploy -s prod",
+    "deploy:test": "npm-run-all deploy:test:cpu deploy:test:transfer generate \"upload 1MB.dat -s test\"",
+    "deploy:test:cpu": "cd services/cpu && yarn deploy -s test",
+    "deploy:test:transfer": "cd services/transfer && yarn deploy -s test",
+    "test": "NODE_ENV=test jest",
+    "generate": "dd if=/dev/zero of=1MB.dat bs=1M count=1",
+    "invoke": "node tools/invoke.js",
+    "geturl": "node tools/geturl.js",
+    "upload": "node tools/upload.js",
+    "link:transfer": "[ -L services/transfer/node_modules ] || cd services/transfer && ln -sFf ../../node_modules node_modules",
+    "link:cpu": "[ -L services/cpu/node_modules ] || cd services/cpu && ln -sFf ../../node_modules node_modules",
+    "postinstall": "yarn link:transfer && yarn link:cpu"
+  },
+  "keywords": [
+    "serverless",
+    "spotinst"
+  ],
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "colors": "^1.3.0",
+    "config": "^1.30.0",
+    "jest": "^23.6.0",
+    "js-yaml": "^3.12.0",
+    "npm-run-all": "^4.1.3",
+    "request": "^2.88.0",
+    "serverless-plugin-write-env-vars": "^1.0.2",
+    "serverless-spotinst-functions": "*",
+    "yargs": "^11.0.0"
+  },
+  "dependencies": {
+    "@quirk0.o/async": "^2.0.0",
+    "@quirk0.o/benchmark": "^2.0.0",
+    "@quirk0.o/cloud-functions-common": "^3.0.1",
+    "@quirk0.o/random-stream": "^3.0.0",
+    "@quirk0.o/serverless-config": "^1.0.0",
+    "bluebird": "^3.5.0",
+    "bytes": "^3.0.0",
+    "dotenv": "^6.0.0"
+  },
+  "peerDependencies": {
+    "serverless": "^1.27.2"
+  }
+}

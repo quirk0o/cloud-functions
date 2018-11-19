@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "link:bin": "ln -sfn ../../../../bin/linux bin",
+    "deploy": "NODE_CONFIG_DIR=../../config yarn link:bin && sls deploy"
+  }
+}

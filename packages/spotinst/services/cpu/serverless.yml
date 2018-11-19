@@ -1,0 +1,13 @@
+service: serverless-reseach-dev-cpu
+
+provider:
+  name: spotinst
+  stage: dev
+  spotinst:
+    environment: env-c869a3c7
+
+functions:
+  - ${file(./cpu-functions.yml)}
+
+plugins:
+  - serverless-spotinst-functions

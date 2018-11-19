@@ -1,0 +1,42 @@
+cpu-128:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 128
+  timeout: 300
+  access: public
+cpu-256:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 256
+  timeout: 300
+  access: public
+cpu-512:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 512
+  timeout: 300
+  access: public
+cpu-1024:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 1024
+  timeout: 300
+  access: public
+cpu-1536:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 1536
+  timeout: 300
+  access: public
+cpu-2048:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 2048
+  timeout: 300
+  access: public
+cpu-2496:
+  runtime: nodejs8.3
+  handler: handler.exec
+  memory: 2496
+  timeout: 300
+  access: public
