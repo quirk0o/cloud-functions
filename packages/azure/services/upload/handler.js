@@ -46,21 +46,22 @@ const requireEnv = (context) => (env) => {
 }
 
 module.exports.upload = (context, request) => {
-  const body = JSON.parse(request.body)
+  const body = request.body
   const functionDirectory = context.executionContext.functionDirectory
 
   const env = setEnv(functionDirectory)
   const size = requireSize(context)(body)
   const {connectionString, container} = requireEnv(context)(env)
-  const sizeInBytes = bytes.parse(size)
 
   const blobService = azure.createBlobService(connectionString)
+
+  const sizeInBytes = bytes.parse(size)
 
   new Benchmark()
     .do('upload')(
       outputFileName,
       logP((fileName) => `Uploading to azs://${container}/${fileName}`, context),
-      (fileName) => writeFile(context, blobService)(container, fileName, sizeInBytes),
+      (fileName) => writeFile(blobService)(container, fileName, sizeInBytes),
       logP(() => `Finished uploading`, context)
     )
     .json()

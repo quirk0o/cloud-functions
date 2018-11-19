@@ -60,7 +60,7 @@ const requireEnv = (context) => (env) => {
 }
 
 module.exports.transfer = (context, request) => {
-  const body = JSON.parse(request.body)
+  const body = request.body
   const functionDirectory = context.executionContext.functionDirectory
 
   const env = setEnv(functionDirectory)
