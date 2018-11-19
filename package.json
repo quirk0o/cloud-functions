@@ -6,5 +6,9 @@
   "license": "MIT",
   "devDependencies": {
     "lerna": "^2.10.2"
+  },
+  "scripts": {
+    "build": "yarn build:linux",
+    "build:linux": "docker build ./build_native/linux -t cross:linux && docker run --rm -v `pwd`/c-random:/src -v `pwd`/bin:/cross/bin cross:linux sh -c 'cd /src && cc -o /cross/bin/linux/hello -std=c99 -static random.c miniz.c hello.c'"
   }
 }

@@ -37,7 +37,7 @@ class Benchmark {
         .then(() => this._time[key] = process.hrtime(hrtime))
         .then(logP(() => `${key} finished`, this._logger))
         .catch(tapError(logP(err => `${key} error: ${err.stack}}`, this._logger)))
-        .catch(error => this._response[key] = {error: error.toString()})
+        .catch(error => this._response[key] = {error: error.message || error.stack || error })
     }
   }
 }
