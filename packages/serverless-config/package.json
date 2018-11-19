@@ -1,6 +1,6 @@
 {
   "name": "@quirk0.o/serverless-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Loads serverless configuration with node-config",
   "main": "index.js",
   "author": "quirk0.o",
