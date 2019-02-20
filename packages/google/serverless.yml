@@ -45,6 +45,31 @@ functions:
     memorySize: 2048
     events:
       - http: path
+  latency-128:
+      handler: latency${self:custom.suffix}-128
+      memorySize: 128
+      events:
+        - http: path
+  latency-256:
+    handler: latency${self:custom.suffix}-256
+    memorySize: 256
+    events:
+      - http: path
+  latency-512:
+    handler: latency${self:custom.suffix}-512
+    memorySize: 512
+    events:
+      - http: path
+  latency-1024:
+    handler: latency${self:custom.suffix}-1024
+    memorySize: 1024
+    events:
+      - http: path
+  latency-2048:
+    handler: latency${self:custom.suffix}-2048
+    memorySize: 2048
+    events:
+      - http: path
 
 resources:
   resources:

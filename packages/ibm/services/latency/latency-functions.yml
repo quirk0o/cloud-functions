@@ -1,0 +1,15 @@
+latency-128:
+  handler: latency.handler
+  memory: 128
+  events:
+    - http: POST latency-128
+latency-256:
+  handler: latency.handler
+  memory: 256
+  events:
+    - http: POST latency-256
+latency-512:
+  handler: latency.handler
+  memory: 512
+  events:
+    - http: POST latency-512

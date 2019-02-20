@@ -58,8 +58,6 @@ functions:
   transfer-128:
     handler: handler.transfer
     memorySize: 128
-    environment:
-      MEMORY: 128
     events:
       - http:
           path: transfer-128
@@ -67,8 +65,6 @@ functions:
   download-128:
     handler: handler.download128
     memorySize: 128
-    environment:
-      MEMORY: 128
     events:
       - http:
           path: download-128
@@ -76,8 +72,6 @@ functions:
   upload-128:
     handler: handler.upload128
     memorySize: 128
-    environment:
-      MEMORY: 128
     events:
       - http:
           path: upload-128
@@ -85,8 +79,6 @@ functions:
   transfer-256:
     handler: handler.transfer
     memorySize: 256
-    environment:
-      MEMORY: 256
     events:
       - http:
           path: transfer-256
@@ -94,8 +86,6 @@ functions:
   transfer-512:
     handler: handler.transfer
     memorySize: 512
-    environment:
-      MEMORY: 512
     events:
       - http:
           path: transfer-512
@@ -103,8 +93,6 @@ functions:
   transfer-1024:
     handler: handler.transfer
     memorySize: 1024
-    environment:
-      MEMORY: 1024
     events:
       - http:
           path: transfer-1024
@@ -112,11 +100,72 @@ functions:
   transfer-1536:
     handler: handler.transfer
     memorySize: 1536
-    environment:
-      MEMORY: 1536
     events:
       - http:
           path: transfer-1536
+          method: post
+  transfer-2048:
+    handler: handler.transfer
+    memorySize: 2048
+    events:
+      - http:
+          path: transfer-2048
+          method: post
+  transfer-3008:
+    handler: handler.transfer
+    memorySize: 3008
+    events:
+      - http:
+          path: transfer-3008
+          method: post
+  latency-128:
+    handler: handler.latency
+    memorySize: 128
+    events:
+      - http:
+          path: latency-128
+          method: post
+  latency-256:
+    handler: handler.latency
+    memorySize: 256
+    events:
+      - http:
+          path: latency-256
+          method: post
+  latency-512:
+    handler: handler.latency
+    memorySize: 512
+    events:
+      - http:
+          path: latency-512
+          method: post
+  latency-1024:
+    handler: handler.latency
+    memorySize: 1024
+    events:
+      - http:
+          path: latency-1024
+          method: post
+  latency-1536:
+    handler: handler.latency
+    memorySize: 1536
+    events:
+      - http:
+          path: latency-1536
+          method: post
+  latency-2048:
+    handler: handler.latency
+    memorySize: 2048
+    events:
+      - http:
+          path: latency-2048
+          method: post
+  latency-3008:
+    handler: handler.latency
+    memorySize: 3008
+    events:
+      - http:
+          path: latency-3008
           method: post
 
 resources:

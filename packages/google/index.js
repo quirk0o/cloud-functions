@@ -1,5 +1,6 @@
 const fs = require('fs')
 const bytes = require('bytes')
+const stream = require('stream')
 const runtimeConfig = require('cloud-functions-runtime-config')
 const storage = require('@google-cloud/storage')()
 
@@ -30,6 +31,21 @@ const writeFile = (bucket, fileName, size) => {
   const writeStream = file(bucket, fileName).createWriteStream()
   const chunkSize = size / 8
   const generator = randomStream(size, chunkSize)
+  return streamToPromise(generator.pipe(writeStream))
+}
+
+const writeStr = (bucket, fileName, str) => {
+  const writeStream = file(bucket, fileName).createWriteStream()
+  let read = false
+  const generator = new stream.Readable({
+    read () {
+      if (read) {
+        return generator.push(null)
+      }
+      read = true
+      return generator.push(str)
+    }
+  })
   return streamToPromise(generator.pipe(writeStream))
 }
 
@@ -76,3 +92,32 @@ exports['transfer-dev-256'] = exports.transfer('256')
 exports['transfer-dev-512'] = exports.transfer('512')
 exports['transfer-dev-1024'] = exports.transfer('1024')
 exports['transfer-dev-2048'] = exports.transfer('2048')
+
+exports.latency = (memory) => (request, response) => {
+  try {
+    new Benchmark()
+      .do('latency')(
+        config(OUTPUT_BUCKET_CONFIG_KEY),
+        (bucket) => [bucket, 'empty.dat'],
+        logP(([bucket, fileName]) => `Uploading to gs://${bucket}/${fileName}`),
+        ([bucket, fileName]) => writeStr(bucket, fileName, '\0'),
+        logP(() => `Finished uploading`)
+      )
+      .json()
+      .then(logP(json => `Finished: ${JSON.stringify(json)}`))
+      .then(json => response.status(200).json(json))
+  } catch (e) {
+    response.status(200).json({error: e.message})
+  }
+}
+
+exports['latency-128'] = exports.latency('128')
+exports['latency-256'] = exports.latency('256')
+exports['latency-512'] = exports.latency('512')
+exports['latency-1024'] = exports.latency('1024')
+exports['latency-2048'] = exports.latency('2048')
+exports['latency-dev-128'] = exports.latency('128')
+exports['latency-dev-256'] = exports.latency('256')
+exports['latency-dev-512'] = exports.latency('512')
+exports['latency-dev-1024'] = exports.latency('1024')
+exports['latency-dev-2048'] = exports.latency('2048')

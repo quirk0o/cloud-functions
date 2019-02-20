@@ -32,6 +32,10 @@ const writeFile = (service) => (bucket, fileName, size) => {
 
   return bluebird.promisify(service.upload.bind(service))(file(bucket, fileName, params), options)
 }
+const writeObject = (service) => (bucket, fileName, str) => {
+  const params = {Body: str}
+  return bluebird.promisify(service.putObject.bind(service))(file(bucket, fileName, params))
+}
 const response = (json) => ({statusCode: 200, body: JSON.stringify(json)})
 
 const parseReq = (event) => JSON.parse(event.body)
@@ -73,6 +77,26 @@ const runTasks = (...taskList) => (event, context, callback) => {
       .then(logP(json => `Finished: ${JSON.stringify(json)}`))
       .then(json => callback(null, response(json)))
 
+  } catch (e) {
+    callback(null, response({error: e.message}))
+  }
+}
+
+exports.latency = (event, context, callback) => {
+  try {
+    const s3 = new AWS.S3({signatureVersion: 'v4'})
+
+    new Benchmark()
+      .do('latency')(
+        () => 'empty.dat',
+        (fileName) => [fileName, '\0'],
+        logP(([fileName]) => `Uploading to s3://${OUTPUT_BUCKET}/${fileName}`),
+        ([fileName, str]) => writeObject(s3)(OUTPUT_BUCKET, fileName, str),
+        logP(() => `Finished uploading`)
+      )
+      .json()
+      .then(logP(json => `Finished: ${JSON.stringify(json)}`))
+      .then(json => callback(null, response(json)))
 
   } catch (e) {
     callback(null, response({error: e.message}))

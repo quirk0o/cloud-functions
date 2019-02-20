@@ -18,6 +18,7 @@
     "deploy:prod:upload": "cd services/upload && yarn deploy -s prod",
     "deploy:prod:download": "cd services/download && yarn deploy -s prod",
     "deploy:prod:transfer": "cd services/transfer && yarn deploy -s prod",
+    "deploy:prod:latency": "cd services/latency && yarn deploy -s prod",
     "deploy:test": "npm-run-all deploy:test:upload deploy:test:download deploy:test:transfer generate \"upload test.dat -s test\"",
     "deploy:test:upload": "cd services/upload && yarn deploy -s test",
     "deploy:test:download": "cd services/download && yarn deploy -s test",
